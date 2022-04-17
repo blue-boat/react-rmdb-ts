@@ -21,7 +21,6 @@ const useHomeFetch = () => {
     setLoading(true);
     try {
       const newState = await api.fetchMovies(searchTerm, page);
-      console.log("getting from api");
       setState((prevState) => {
         const updatedState = {
           ...newState,
@@ -48,7 +47,6 @@ const useHomeFetch = () => {
   useEffect(() => {
     const sessionState = sessionStorage.getItem(SESSION_STORAGE_HOME_KEY);
     if (!searchTerm && sessionState) {
-      console.log("Getting from session");
       setState(JSON.parse(sessionState));
       setLoading(false);
     } else {

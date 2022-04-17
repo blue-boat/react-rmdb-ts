@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import API, { Cast, Crew, Movie } from "../API";
 
+const SESSION_STORAGE_MOVIE_KEY = "react-rmdn-movie-";
+
 export type MovieState = Movie & { actors: Cast[]; directors: Crew[] };
 
 const initialState = {} as MovieState;
@@ -21,6 +23,10 @@ const useMovieFetch = (movieId: number) => {
         actors: credits.cast,
         directors: credits.crew.filter((c) => c.job === "Director"),
       };
+      sessionStorage.setItem(
+        SESSION_STORAGE_MOVIE_KEY + movieId.toString(),
+        JSON.stringify(newState)
+      );
       setState(newState);
     } catch (err) {
       setError(true);
@@ -30,7 +36,15 @@ const useMovieFetch = (movieId: number) => {
   }, [movieId]);
 
   useEffect(() => {
-    fetchMovie();
+    const sessionState = sessionStorage.getItem(
+      SESSION_STORAGE_MOVIE_KEY + movieId.toString()
+    );
+    if (sessionState) {
+      setState(JSON.parse(sessionState));
+      setLoading(false);
+    } else {
+      fetchMovie();
+    }
   }, [movieId, fetchMovie]);
 
   return { state, loading, error };
