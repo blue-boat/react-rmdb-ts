@@ -1,14 +1,16 @@
-import styled from 'styled-components'
+import styled from "styled-components";
+
+type WrapperProps = {
+  image: string;
+};
 
 export const Wrapper = styled.div`
-  background:
-    linear-gradient(
+  background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0) 41%,
       rgba(0, 0, 0, 0.65) 100%
     ),
-    url(${props => props.image}),
-    var(--darkGrey);
+    url(${(props: WrapperProps) => props.image}), var(--darkGrey);
   height: 600px;
   background-size: cover;
   background-position: 50% 50%;
@@ -17,7 +19,8 @@ export const Wrapper = styled.div`
   @keyframes animateHeroImage {
     from {
       opacity: 0;
-    } to {
+    }
+    to {
       opacity: 1;
     }
   }
@@ -52,5 +55,4 @@ export const Text = styled.div`
       font-size: var(--fontSmall);
     }
   }
-
 `;

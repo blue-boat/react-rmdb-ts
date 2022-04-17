@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+type ImageProps = {
+  clickable?: boolean;
+};
+
 export const Image = styled.img`
   width: 100%;
   max-width: 720px;
@@ -10,7 +14,7 @@ export const Image = styled.img`
 
   :hover {
     opacity: 0.8;
-    cursor: ${props => props.clickable ? 'pointer' : 'none'};
+    cursor: ${(props: ImageProps) => (props.clickable ? "pointer" : "none")};
   }
 
   @keyframes animateThumb {
