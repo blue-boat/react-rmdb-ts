@@ -2,7 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Wrapper, Content } from "./Breadcrumbs.styles";
 
-const Breadcrumbs = ({ movieTitle }) => (
+type Props = {
+  movieTitle: string;
+};
+
+const Breadcrumbs: React.FC<Props> = ({ movieTitle }) => (
   <Wrapper>
     <Content>
       <Link to="/">

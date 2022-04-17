@@ -1,10 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
-import API from "../API";
+import API, { Cast, Crew, Movie } from "../API";
 
-const useMovieFetch = (movieId) => {
-  const [state, setState] = useState();
-  const [loading, setLoading] = useState();
-  const [error, setError] = useState();
+type MovieState = Movie & { actors: Cast[]; directors: Crew[] };
+
+const initialState = {} as MovieState;
+
+const useMovieFetch = (movieId: number) => {
+  const [state, setState] = useState(initialState);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const fetchMovie = useCallback(async () => {
     setLoading(true);

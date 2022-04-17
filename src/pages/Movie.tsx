@@ -5,9 +5,12 @@ import MovieInfo from "../components/MovieInfo";
 import Spinner from "../components/Spinner";
 import useMovieFetch from "../Hooks/useMovieFetch";
 
-const Movie = () => {
+const Movie: React.FC = () => {
   const { movieId } = useParams();
-  const { state: movie, loading, error } = useMovieFetch(movieId);
+
+  const { state: movie, loading } = useMovieFetch(
+    movieId ? Number(movieId) : NaN
+  );
 
   if (loading) {
     return <Spinner />;
