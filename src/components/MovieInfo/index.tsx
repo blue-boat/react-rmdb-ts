@@ -3,10 +3,15 @@ import { Wrapper, Content, Text } from "./MovieInfo.styles";
 import { BACKDROP_SIZE, POSTER_SIZE, IMAGE_BASE_URL } from "../../config";
 import Thumb from "../Thumb";
 import NoImage from "../../images/no_image.jpg";
+import { MovieState } from "../../Hooks/useMovieFetch";
 
 const blackBackdrop = "#000000";
 
-const Movie = ({ movie }) => (
+type Props = {
+  movie: MovieState;
+};
+
+const MovieInfo: React.FC<Props> = ({ movie }) => (
   <Wrapper
     backdrop={
       movie?.backdrop_path
@@ -35,8 +40,8 @@ const Movie = ({ movie }) => (
             <div className="score">{movie?.vote_average}</div>
           </div>
           <div className="director">
-            <h3>DIRECTOR{movie?.directors.length > 1 ? "S" : ""}</h3>
-            {movie?.directors.map((director) => (
+            <h3>DIRECTOR{movie?.directors?.length > 1 ? "S" : ""}</h3>
+            {movie?.directors?.map((director) => (
               <p key={director.credit_id}>{director.name}</p>
             ))}
           </div>
@@ -46,4 +51,4 @@ const Movie = ({ movie }) => (
   </Wrapper>
 );
 
-export default Movie;
+export default MovieInfo;

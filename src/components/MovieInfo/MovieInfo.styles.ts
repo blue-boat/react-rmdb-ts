@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
+type WrapperProps = {
+  backdrop: string;
+};
+
 export const Wrapper = styled.div`
-  background: ${(props) => props.backdrop};
+  background: ${(props: WrapperProps) => props.backdrop};
   background-size: cover;
   background-position: center;
   padding: 40px 20px;

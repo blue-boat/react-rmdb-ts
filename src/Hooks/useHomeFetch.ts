@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import api, { Movie } from "../API";
 
+const SESSION_STORAGE_HOME_KEY = "react-rmdb-home";
+
 const initialState = {
   page: 0,
   results: [] as Movie[],
@@ -19,13 +21,21 @@ const useHomeFetch = () => {
     setLoading(true);
     try {
       const newState = await api.fetchMovies(searchTerm, page);
-      setState((prevState) => ({
-        ...newState,
-        results:
-          page > 1
-            ? [...prevState.results, ...newState.results]
-            : newState.results,
-      }));
+      console.log("getting from api");
+      setState((prevState) => {
+        const updatedState = {
+          ...newState,
+          results:
+            page > 1
+              ? [...prevState.results, ...newState.results]
+              : newState.results,
+        };
+        sessionStorage.setItem(
+          SESSION_STORAGE_HOME_KEY,
+          JSON.stringify(updatedState)
+        );
+        return updatedState;
+      });
     } catch (err) {
       setError(true);
     } finally {
@@ -33,10 +43,20 @@ const useHomeFetch = () => {
     }
   };
 
+  // Load first page of popular movie (w/wo search term)
+  // First page without search term is retrieved from session storage
   useEffect(() => {
-    getMovies(1, searchTerm);
+    const sessionState = sessionStorage.getItem(SESSION_STORAGE_HOME_KEY);
+    if (!searchTerm && sessionState) {
+      console.log("Getting from session");
+      setState(JSON.parse(sessionState));
+      setLoading(false);
+    } else {
+      getMovies(1, searchTerm);
+    }
   }, [searchTerm]);
 
+  // Load subsequent pages of popular movies (w/wo search term)
   useEffect(() => {
     if (!isLoadingMore) {
       return;

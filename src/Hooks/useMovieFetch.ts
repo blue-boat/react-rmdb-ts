@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import API, { Cast, Crew, Movie } from "../API";
 
-type MovieState = Movie & { actors: Cast[]; directors: Crew[] };
+export type MovieState = Movie & { actors: Cast[]; directors: Crew[] };
 
 const initialState = {} as MovieState;
 

@@ -18,7 +18,7 @@ const Movie: React.FC = () => {
 
   return (
     <>
-      <Breadcrumbs movieTitle={movie?.original_title} />
+      <Breadcrumbs movieTitle={movie.original_title} />
       <MovieInfo movie={movie} />
     </>
   );
