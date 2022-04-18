@@ -1,6 +1,8 @@
 # react-rmdb-ts
 
-Simple clone of TMDB
+Simple clone of [TMDB](https://www.themoviedb.org/?language=en-GB)
+
+Full tutorial: https://www.youtube.com/watch?v=nTeuhbP7wdE
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
