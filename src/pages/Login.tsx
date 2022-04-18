@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import API from "../API";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../context";
 import Button from "../components/Button";
-import { useNavigate } from "react-router-dom";
+import { Wrapper } from "../Login.styles";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -39,9 +40,9 @@ const Login = () => {
   };
 
   return (
-    <div>
-      {error && <div> Something went wrong!</div>}
-      <label>Username:</label>
+    <Wrapper>
+      {error && <div className="error">Something went wrong!</div>}
+      <label>Username</label>
       <input
         type="text"
         name="username"
@@ -56,7 +57,7 @@ const Login = () => {
         onChange={(e) => handleInput(e)}
       />
       <Button label="Login" callback={handleSubmit} />
-    </div>
+    </Wrapper>
   );
 };
 
