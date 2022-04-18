@@ -8,6 +8,8 @@ import {
   SESSION_ID_URL,
 } from "./config";
 
+import { Session } from "./context";
+
 const defaultConfig = {
   method: "POST",
   headers: {
@@ -82,7 +84,7 @@ const apiSettings = {
     requestToken: string,
     username: string,
     password: string
-  ): Promise<string | undefined> => {
+  ): Promise<Session | undefined> => {
     const bodyData = {
       username,
       password,
@@ -97,12 +99,12 @@ const apiSettings = {
     ).json();
     // Then get the sessionId with the requestToken
     if (data.success) {
-      const sessionId = await (
+      const sessionId = (await (
         await fetch(SESSION_ID_URL, {
           ...defaultConfig,
           body: JSON.stringify({ request_token: requestToken }),
         })
-      ).json();
+      ).json()) as Session;
       return sessionId;
     }
   },
