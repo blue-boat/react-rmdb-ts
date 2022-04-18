@@ -12,6 +12,12 @@ export const Content = styled.div`
   align-items: center;
   margin: 0 auto;
   padding: 0 20px;
+  color: var(--white);
+
+  a {
+    color: var(--white);
+    text-decoration: none;
+  }
 `;
 
 export const LogoImg = styled.img`
