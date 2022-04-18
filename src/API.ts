@@ -110,8 +110,8 @@ const apiSettings = {
   },
   rateMovie: async (
     sessionId: string,
-    movieId: string,
-    value: string
+    movieId: number,
+    value: number
   ): Promise<any> => {
     const endpoint = `${API_URL}movie/${movieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`;
 
